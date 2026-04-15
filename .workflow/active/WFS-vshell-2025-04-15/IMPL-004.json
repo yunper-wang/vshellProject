@@ -1,0 +1,43 @@
+{
+  "id": "IMPL-004",
+  "title": "Unix Shell Execution with PTY",
+  "description": "Implement Unix shell execution using creack/pty. Support bash/zsh, console resizing with SIGWINCH, raw terminal mode with golang.org/x/term",
+  "status": "pending",
+  "priority": "P0",
+  "assigned_to": null,
+  "estimated_hours": 16,
+  "parent": null,
+  "dependencies": ["IMPL-002", "IMPL-003"],
+  "blockers": [],
+  "files": {
+    "create": [
+      "pkg/shell/shell.go",
+      "pkg/shell/unix.go",
+      "pkg/shell/unix_test.go",
+      "pkg/session/shell_session.go",
+      "pkg/session/manager.go"
+    ],
+    "modify": [],
+    "delete": ["main.go"]
+  },
+  "specifications": {
+    "supported_shells": ["/bin/sh", "/bin/bash", "/usr/bin/zsh"],
+    "pty_library": "github.com/creack/pty",
+    "interface": "ReadWriteCloser + Resize + Wait",
+    "signal_handling": "SIGWINCH for resize",
+    "terminal_mode": "raw mode via golang.org/x/term"
+  },
+  "dependencies_go": [
+    "github.com/creack/pty",
+    "golang.org/x/term"
+  ],
+  "success_criteria": [
+    "Interactive shell session works",
+    "vi/vim runs correctly in PTY",
+    "Window resize updates terminal size",
+    "Exit codes propagated correctly",
+    "Multiple concurrent sessions supported",
+    "Proper cleanup on disconnect"
+  ],
+  "notes": "Test with: vim, htop, sudo (password prompts). Container environments may need PTY permissions"
+}

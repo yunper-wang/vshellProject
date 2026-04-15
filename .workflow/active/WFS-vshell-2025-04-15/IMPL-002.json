@@ -1,0 +1,43 @@
+{
+  "id": "IMPL-002",
+  "title": "Protocol v1 Frame Design",
+  "description": "Design and implement binary protocol frame format: 7-byte header (Version, Channel, Type, Length) + payload + 4-byte CRC32 trailer",
+  "status": "pending",
+  "priority": "P0",
+  "assigned_to": null,
+  "estimated_hours": 16,
+  "parent": null,
+  "dependencies": ["IMPL-001"],
+  "blockers": [],
+  "files": {
+    "create": ["pkg/protocol/frame.go", "pkg/protocol/message.go", "pkg/protocol/channel.go", "pkg/protocol/frame_test.go"],
+    "modify": [],
+    "delete": []
+  },
+  "specifications": {
+    "frame_format": "| Ver(1) | Chan(1) | Type(1) | Len(4) | Payload | CRC32(4) |",
+    "channels": {
+      "0": "Control",
+      "1": "Shell PTY",
+      "2": "File Transfer",
+      "3-255": "Reserved"
+    },
+    "message_types": {
+      "0x01": "DATA",
+      "0x02": "ACK",
+      "0x03": "NACK",
+      "0x04": "HEARTBEAT",
+      "0x05": "CLOSE",
+      "0x06": "RESET"
+    },
+    "max_payload": "4MB"
+  },
+  "success_criteria": [
+    "Frame encoding/decoding works correctly",
+    "CRC32 validation catches corruption",
+    "Channel multiplexing works",
+    "Unit tests cover edge cases",
+    "Error handling for malformed frames"
+  ],
+  "notes": "CRITICAL: Version byte and flags field reserved for v2 extensions"
+}

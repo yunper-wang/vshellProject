@@ -1,0 +1,41 @@
+{
+  "id": "IMPL-008",
+  "title": "Structured Logging and Debug Support",
+  "description": "Implement structured logging with zerolog. Support log levels (TRACE, DEBUG, INFO, WARN, ERROR), log rotation, sensitive data redaction. Add debug CLI flags",
+  "status": "pending",
+  "priority": "P1",
+  "assigned_to": null,
+  "estimated_hours": 12,
+  "parent": null,
+  "dependencies": ["IMPL-001", "IMPL-003"],
+  "blockers": [],
+  "files": {
+    "create": [
+      "pkg/logging/logger.go",
+      "pkg/logging/metrics.go",
+      "cmd/vshell-server/main.go",
+      "cmd/vshell-client/main.go"
+    ],
+    "modify": [],
+    "delete": []
+  },
+  "specifications": {
+    "log_level": ["TRACE", "DEBUG", "INFO", "WARN", "ERROR"],
+    "log_rotation": "10MB size-based + daily",
+    "redaction": "passwords, keys, tokens",
+    "cli_flags": ["--debug", "--trace", "--log-file"],
+    "output_format": "JSON (production), Console (dev)"
+  },
+  "dependencies_go": [
+    "github.com/rs/zerolog"
+  ],
+  "success_criteria": [
+    "Log levels filter appropriately",
+    "Structured JSON logs generated",
+    "Sensitive data redacted",
+    "Log rotation works",
+    "Debug/trace modes functional",
+    "Performance overhead minimal (<5%)"
+  ],
+  "notes": "Use zerolog for zero-allocation. Add context fields: conn_id, session_id"
+}

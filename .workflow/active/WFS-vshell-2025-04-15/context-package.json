@@ -1,0 +1,37 @@
+{
+  "sessionId": "WFS-vshell-2025-04-15",
+  "projectType": "greenfield",
+  "language": "Go",
+  "languageVersion": "1.26",
+  "conflictRisk": "low",
+  "existingCode": {
+    "files": ["main.go", "go.mod"],
+    "description": "Fresh Go 1.26 project with minimal hello world template. Ground zero - no existing infrastructure."
+  },
+  "keyFiles": [],
+  "architecture": "none",
+  "integrationPoints": {
+    "transport": "none",
+    "protocol": "none",
+    "auth": "none"
+  },
+  "constraints": [
+    "Go 1.26 language version required",
+    "Cross-platform compatibility (Linux/Mac/Windows)",
+    "Production-ready security (mTLS)",
+    "6-week MVP deadline",
+    "Standard library preference over external dependencies"
+  ],
+  "existingPatterns": [],
+  "dependencies": {},
+  "criticalFiles": [
+    "main.go: entry point - needs complete replacement",
+    "go.mod: module definition - minimal, needs expansion"
+  ],
+  "generatedFiles": [
+    ".workflow/.brainstorm/BS-vshell-2025-04-15/brainstorm.md",
+    ".workflow/.brainstorm/BS-vshell-2025-04-15/perspectives.json",
+    ".workflow/.brainstorm/BS-vshell-2025-04-15/synthesis.json",
+    ".workflow/.scratchpad/MVP-IMPLEMENTATION-GUIDE.md"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "IMPL-007",
+  "title": "Session Resilience and Reconnection",
+  "description": "Implement automatic reconnection with exponential backoff, heartbeat mechanism, session state caching for resume. Support graceful session migration",
+  "status": "pending",
+  "priority": "P0",
+  "assigned_to": null,
+  "estimated_hours": 16,
+  "parent": null,
+  "dependencies": ["IMPL-003", "IMPL-004"],
+  "blockers": [],
+  "files": {
+    "create": [
+      "pkg/session/reconnect.go",
+      "pkg/session/heartbeat.go",
+      "pkg/client/reconnect.go",
+      "pkg/client/client.go",
+      "pkg/session/session_test.go"
+    ],
+    "modify": [],
+    "delete": []
+  },
+  "specifications": {
+    "backoff_strategy": "exponential: 1s, 2s, 4s, 8s, max 30s",
+    "heartbeat_interval": "30s",
+    "heartbeat_timeout": "3 missed beats = disconnect",
+    "state_machine": ["DISCONNECTED", "CONNECTING", "CONNECTED", "RECONNECTING"],
+    "buffer_size": "10MB circular buffer for replay"
+  },
+  "success_criteria": [
+    "Client reconnects after network interruption",
+    "Exponential backoff prevents thundering herd",
+    "Heartbeat detects dead connections",
+    "Session resumes with cached state",
+    "Pending commands replay on reconnect",
+    "Graceful degradation if session lost"
+  ],
+  "notes": "HIGH RISK: Test with network simulators. Shell sessions cannot fully resume (process dies)"
+}

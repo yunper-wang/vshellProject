@@ -1,0 +1,33 @@
+{
+  "session_id": "WFS-vshell-2025-04-15",
+  "topic": "vshell 远程控制软件 - Pragmatic MVP",
+  "status": "ready_for_execution",
+  "created_at": "2025-04-15T09:45:00Z",
+  "updated_at": "2025-04-15T09:45:00Z",
+  "brainstorm_session": "BS-vshell-2025-04-15",
+  "planning_mode": "auto-continue",
+  "tasks": [
+    "IMPL-001",
+    "IMPL-002",
+    "IMPL-003",
+    "IMPL-004",
+    "IMPL-005",
+    "IMPL-006",
+    "IMPL-007",
+    "IMPL-008",
+    "IMPL-009",
+    "IMPL-010"
+  ],
+  "total_estimated_hours": 176,
+  "total_duration_weeks": 6,
+  "current_task": null,
+  "completed_tasks": [],
+  "artifacts": {
+    "IMPL_PLAN.md": ".workflow/active/WFS-vshell-2025-04-15/",
+    "task_jsons": ".workflow/active/WFS-vshell-2025-04-15/IMPL-*.json",
+    "context_package": ".workflow/active/WFS-vshell-2025-04-15/context-package.json",
+    "brainstorm": ".workflow/.brainstorm/BS-vshell-2025-04-15/",
+    "mvp_guide": ".workflow/.scratchpad/MVP-IMPLEMENTATION-GUIDE.md"
+  },
+  "execution_status": "pending_start"
+}

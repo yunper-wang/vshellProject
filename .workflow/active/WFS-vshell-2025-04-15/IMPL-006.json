@@ -1,0 +1,45 @@
+{
+  "id": "IMPL-006",
+  "title": "Bidirectional File Transfer with Resume",
+  "description": "Implement chunked file upload/download with resume capability. Support chunked transfer (64KB), zstd compression, progress reporting, SHA256 verification",
+  "status": "pending",
+  "priority": "P0",
+  "assigned_to": null,
+  "estimated_hours": 20,
+  "parent": null,
+  "dependencies": ["IMPL-002", "IMPL-003"],
+  "blockers": [],
+  "files": {
+    "create": [
+      "pkg/file/transfer.go",
+      "pkg/file/upload.go",
+      "pkg/file/download.go",
+      "pkg/file/checksum.go",
+      "pkg/file/file_test.go",
+      "pkg/session/file_session.go"
+    ],
+    "modify": [],
+    "delete": []
+  },
+  "specifications": {
+    "chunk_size": "64KB (configurable 4KB-4MB)",
+    "window_size": "8 chunks in-flight",
+    "compression": "zstd level 3 (optional)",
+    "checksum": "SHA256",
+    "resume": "offset-based with partial verification",
+    "progress_reporting": "bytes transferred, speed, percentage"
+  },
+  "dependencies_go": [
+    "github.com/klauspost/compress/zstd"
+  ],
+  "success_criteria": [
+    "Upload/download complete files",
+    "Resume interrupted transfers",
+    "Progress reports accurate",
+    "Checksums verify integrity",
+    "Large files (>100MB) stream without OOM",
+    "Compression reduces size for text",
+    "Cross-platform path handling"
+  ],
+  "notes": "Verify: Path traversal prevention, atomic rename on complete"
+}

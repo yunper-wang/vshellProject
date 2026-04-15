@@ -1,0 +1,46 @@
+{
+  "id": "IMPL-009",
+  "title": "CLI Implementation with Cobra",
+  "description": "Build vshell-server and vshell-client CLI using Cobra framework. Support subcommands, configuration file, environment variables, comprehensive help",
+  "status": "pending",
+  "priority": "P1",
+  "assigned_to": null,
+  "estimated_hours": 12,
+  "parent": null,
+  "dependencies": ["IMPL-001", "IMPL-003"],
+  "blockers": [],
+  "files": {
+    "create": [
+      "cmd/vshell-server/root.go",
+      "cmd/vshell-server/start.go",
+      "cmd/vshell-server/config.go",
+      "cmd/vshell-client/root.go",
+      "cmd/vshell-client/connect.go",
+      "cmd/vshell-client/upload.go",
+      "cmd/vshell-client/download.go"
+    ],
+    "modify": [],
+    "delete": []
+  },
+  "commands": {
+    "server": ["start", "version", "config"],
+    "client": ["connect", "upload", "download", "version"]
+  },
+  "flags": {
+    "server": ["--listen", "--cert", "--key", "--config"],
+    "client": ["--connect", "--cert", "--key", "--insecure"]
+  },
+  "dependencies_go": [
+    "github.com/spf13/cobra",
+    "github.com/spf13/viper"
+  ],
+  "success_criteria": [
+    "All subcommands work",
+    "Shell completion generated (bash, zsh, fish, PowerShell)",
+    "Help text comprehensive",
+    "Config file loading (YAML/JSON)",
+    "Environment variable support",
+    "Flag validation"
+  ],
+  "notes": "Server: minimal attack surface (no cobra - optional). Client: rich UX with cobra"
+}

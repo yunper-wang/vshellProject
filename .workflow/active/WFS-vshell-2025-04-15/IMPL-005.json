@@ -1,0 +1,41 @@
+{
+  "id": "IMPL-005",
+  "title": "Windows Shell Support with ConPTY",
+  "description": "Implement Windows 10+ shell execution using ConPTY API with fallback to named pipes for Windows 7/8. Support cmd.exe, PowerShell, console resizing",
+  "status": "pending",
+  "priority": "P0",
+  "assigned_to": null,
+  "estimated_hours": 24,
+  "parent": null,
+  "dependencies": ["IMPL-004"],
+  "blockers": [],
+  "files": {
+    "create": [
+      "pkg/shell/windows.go",
+      "pkg/shell/windows_pipe.go",
+      "pkg/shell/windows_sys.go",
+      "pkg/shell/windows_version.go",
+      "pkg/shell/windows_test.go"
+    ],
+    "modify": [],
+    "delete": []
+  },
+  "specifications": {
+    "conpty_apis": ["CreatePseudoConsole", "ResizePseudoConsole", "ClosePseudoConsole"],
+    "minimum_version": {
+      "major": 10,
+      "build": 17763
+    },
+    "fallback": "Named pipes for Windows 7/8",
+    "supports": ["cmd.exe", "PowerShell"]
+  },
+  "success_criteria": [
+    "ConPTY works on Windows 10 1809+",
+    "Fallback works on older Windows",
+    "Resize changes terminal dimensions",
+    "Colors and formatting work",
+    "Exit codes captured",
+    "Version detection accurate"
+  ],
+  "notes": "HIGH RISK: Test on real Windows hardware. ConPTY has edge cases"
+}

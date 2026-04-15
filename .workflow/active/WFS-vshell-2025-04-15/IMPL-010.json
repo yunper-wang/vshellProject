@@ -1,0 +1,52 @@
+{
+  "id": "IMPL-010",
+  "title": "Integration Testing Suite",
+  "description": "Build comprehensive integration tests for end-to-end scenarios: shell execution, file transfer, reconnection. Use testify for assertions, setup CI/CD",
+  "status": "pending",
+  "priority": "P1",
+  "assigned_to": null,
+  "estimated_hours": 16,
+  "parent": null,
+  "dependencies": ["IMPL-004", "IMPL-005", "IMPL-006", "IMPL-007"],
+  "blockers": [],
+  "files": {
+    "create": [
+      "tests/integration/shell_test.go",
+      "tests/integration/file_test.go",
+      "tests/integration/reconnect_test.go",
+      "tests/integration/testutil.go",
+      "tests/benchmark/throughput_test.go",
+      "tests/benchmark/latency_test.go",
+      ".github/workflows/ci.yml"
+    ],
+    "modify": [],
+    "delete": []
+  },
+  "test_scenarios": [
+    "Connect/execute/disconnect",
+    "Multiple concurrent shells",
+    "File upload (small/large)",
+    "File download with resume",
+    "Network interruption reconnection",
+    "Server restart recovery"
+  ],
+  "benchmarks": [
+    "File transfer throughput >50MB/s",
+    "Shell latency <10ms",
+    "Concurrency 50+ sessions",
+    "Memory leak 24h+"
+  ],
+  "ci_platforms": ["ubuntu-latest", "windows-latest", "macos-latest"],
+  "dependencies_go": [
+    "github.com/stretchr/testify",
+    "github.com/golang/mock (optional)"
+  ],
+  "success_criteria": [
+    "Unit test coverage >80%",
+    "Integration tests pass on all platforms",
+    "Benchmarks meet targets",
+    "CI/CD pipeline green",
+    "No flaky tests"
+  ],
+  "notes": "Test matrix: Linux/Mac/Windows. Use GitHub Actions for CI"
+}
