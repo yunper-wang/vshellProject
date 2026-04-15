@@ -96,7 +96,7 @@ func runServer(cmd *cobra.Command, args []string) {
 func handleConnection(rawConn net.Conn, mgr *session.Manager, logger *logging.Logger) {
 	// Wrap with protocol
 	conn := protocol.NewConn(rawConn)
-	defer conn.Close()
+	defer protocol.CloseConnection(conn)
 
 	// Handshake
 	clientHello, okResp, err := protocol.ServerHandshake(conn, protocol.DefaultServerInfo())
@@ -159,7 +159,7 @@ func handleControlFrame(conn *protocol.Conn, sess *session.Session, frame *proto
 		conn.WriteFrame(protocol.NewFrame(protocol.ChannelControl, protocol.TypeHeartbeat, payload))
 	case protocol.TypeDisconnect:
 		logger.Info("Client requested disconnect")
-		conn.Close()
+		protocol.CloseConnection(conn)
 	default:
 		logger.Warnf("Unknown control message: %d", frame.Type)
 	}

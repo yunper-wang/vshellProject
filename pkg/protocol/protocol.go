@@ -116,8 +116,23 @@ func SendError(conn *Conn, code int, message string) error {
 	return conn.WriteFrame(NewFrame(ChannelControl, TypeError, payload))
 }
 
-// Message types for protocol
-type (
-	// Empty struct for compatibility
-	Empty struct{}
-)
+// DefaultClientInfo returns client info for this machine
+func DefaultClientInfo() *ClientInfo {
+	return &ClientInfo{
+		OS:   "windows",
+		Arch: "amd64",
+	}
+}
+
+// DefaultServerInfo returns server info for this machine
+func DefaultServerInfo() *ServerInfo {
+	return &ServerInfo{
+		OS:   "windows",
+		Arch: "amd64",
+	}
+}
+
+// CloseConnection closes the underlying net.Conn
+func CloseConnection(c *Conn) error {
+	return c.Conn.Close()
+}
